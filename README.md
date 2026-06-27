@@ -506,12 +506,22 @@ Confirmation Email
 Admin Dashboard
 ```
 
-## Future Improvements
+## Roadmap
 
-- Real-time vehicle tracking
-- AI-powered vehicle recommendations
-- Razorpay/Stripe payment integration
-- Email and SMS booking notifications
-- Admin analytics dashboard
-- Docker deployment
-- Cloud deployment on AWS
+✔ Booking System
+
+✔ JWT Authentication
+
+✔ Dynamic Pricing
+
+✔ Admin Dashboard
+
+⬜ Live Driver Tracking
+
+⬜ Payments
+
+⬜ Push Notifications
+
+⬜ Mobile App
+
+⬜ AI Recommendations
