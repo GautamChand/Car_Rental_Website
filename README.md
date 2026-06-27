@@ -285,6 +285,64 @@ SMTP --> Admin["Administrator"]
 * Mongoose ODM
 
 ---
+## Database Design
+
+```mermaid
+erDiagram
+
+    USERS ||--o{ BOOKINGS : places
+    VEHICLES ||--o{ BOOKINGS : assigned
+    DRIVERS ||--o{ BOOKINGS : drives
+    PRICEMAPS ||--o{ BOOKINGS : calculates
+    THEMES ||--|| USERS : customizes
+
+    USERS {
+        string id
+        string name
+        string email
+        string password
+        string role
+    }
+
+    BOOKINGS {
+        string id
+        string vehicle
+        string pickup
+        string destination
+        date bookingDate
+        float fare
+        string status
+    }
+
+    VEHICLES {
+        string id
+        string name
+        string category
+        int seats
+        string image
+    }
+
+    DRIVERS {
+        string id
+        string name
+        string phone
+        string license
+    }
+
+    PRICEMAPS {
+        string id
+        float baseRate
+        float hourlyRate
+        float chauffeurRate
+    }
+
+    THEMES {
+        string id
+        string primaryColor
+        string logo
+    }
+
+```
 
 ## Development Tools
 
@@ -345,66 +403,6 @@ flowchart LR
 
     Email --> SMTP
 ```
-
-## 🗄️ Database Design
-
-```mermaid
-erDiagram
-
-    USERS ||--o{ BOOKINGS : places
-    VEHICLES ||--o{ BOOKINGS : assigned
-    DRIVERS ||--o{ BOOKINGS : drives
-    PRICEMAPS ||--o{ BOOKINGS : calculates
-    THEMES ||--|| USERS : customizes
-
-    USERS {
-        string id
-        string name
-        string email
-        string password
-        string role
-    }
-
-    BOOKINGS {
-        string id
-        string vehicle
-        string pickup
-        string destination
-        date bookingDate
-        float fare
-        string status
-    }
-
-    VEHICLES {
-        string id
-        string name
-        string category
-        int seats
-        string image
-    }
-
-    DRIVERS {
-        string id
-        string name
-        string phone
-        string license
-    }
-
-    PRICEMAPS {
-        string id
-        float baseRate
-        float hourlyRate
-        float chauffeurRate
-    }
-
-    THEMES {
-        string id
-        string primaryColor
-        string logo
-    }
-
-```
-
 
 # :) Project Structure
 
