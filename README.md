@@ -48,7 +48,7 @@
 
 ---
 
-# 🌟 Overview
+# :) Overview
 
 DriveElite was developed as a modern transportation management platform capable of handling the complete lifecycle of premium ride reservations.
 
@@ -58,7 +58,7 @@ The system separates customer-facing functionality from administrative operation
 
 ---
 
-# ✨ Key Features
+# :) Key Features
 
 ## Customer Features
 
@@ -143,7 +143,7 @@ Integrated email functionality provides:
 
 ---
 
-# 🛠 Technology Stack
+# :) Technology Stack
 
 ## Frontend
 
@@ -184,7 +184,7 @@ Integrated email functionality provides:
 
 ---
 
-# 🏗 System Architecture
+# :) System Architecture
 
 ```text
                     +-----------------------+
@@ -235,7 +235,7 @@ Integrated email functionality provides:
 
 ---
 
-# 📁 Project Structure
+# :) Project Structure
 
 ```text
 DriveElite
@@ -260,7 +260,7 @@ DriveElite
 
 ---
 
-# 🔄 High-Level Workflow
+# :) High-Level Workflow
 
 ```text
 Customer
