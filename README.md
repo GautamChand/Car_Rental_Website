@@ -186,51 +186,55 @@ Integrated email functionality provides:
 
 # :) System Architecture
 
-```text
-                    +-----------------------+
-                    |      Customer         |
-                    +-----------+-----------+
-                                |
-                                |
-                     HTTPS Requests
-                                |
-                                ▼
-                 +-----------------------------+
-                 |        Next.js Frontend     |
-                 |                             |
-                 | Landing Pages               |
-                 | Booking Interface           |
-                 | Fleet                       |
-                 | Authentication              |
-                 | Dashboard                   |
-                 +--------------+--------------+
-                                |
-                           REST APIs
-                                |
-                                ▼
-                 +-----------------------------+
-                 |        Express Server       |
-                 |                             |
-                 | Authentication              |
-                 | Booking APIs                |
-                 | Pricing Engine              |
-                 | Email Services              |
-                 | Admin APIs                  |
-                 +--------------+--------------+
-                                |
-                     Mongoose ODM
-                                |
-                                ▼
-                 +-----------------------------+
-                 |          MongoDB            |
-                 |                             |
-                 | Users                       |
-                 | Bookings                    |
-                 | Vehicles                    |
-                 | Drivers                     |
-                 | Pricing Maps                |
-                 | Theme Settings              |
-                 +-----------------------------+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart LR
+
+    User([👤 Customer])
+
+    subgraph FE["🌐 Frontend (Next.js + React)"]
+        Home["🏠 Home"]
+        Fleet["🚘 Fleet"]
+        Booking["📅 Booking"]
+        Profile["👤 Profile"]
+        Contact["📞 Contact"]
+        Dashboard["📊 Admin Dashboard"]
+    end
+
+    subgraph BE["⚡ Backend (Express.js)"]
+        Auth["🔐 JWT Authentication"]
+        BookingAPI["📋 Booking Service"]
+        Pricing["💰 Pricing Engine"]
+        Vehicle["🚗 Vehicle Management"]
+        Driver["👨‍✈️ Driver Management"]
+        Email["📧 Email Service"]
+        Admin["🛠 Admin APIs"]
+    end
+
+    subgraph DB["🍃 MongoDB"]
+        Users[(Users)]
+        Vehicles[(Vehicles)]
+        Drivers[(Drivers)]
+        Bookings[(Bookings)]
+        PriceMaps[(Price Maps)]
+        Themes[(Theme Settings)]
+    end
+
+    SMTP["📨 SMTP Server"]
+
+    User --> FE
+    FE --> BE
+
+    BE --> Users
+    BE --> Vehicles
+    BE --> Drivers
+    BE --> Bookings
+    BE --> PriceMaps
+    BE --> Themes
+
+    Email --> SMTP
+```
 ```
 
 ---
