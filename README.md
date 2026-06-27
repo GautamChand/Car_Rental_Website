@@ -184,9 +184,9 @@ Integrated email functionality provides:
 
 ---
 
-# :) System Architecture
+# :) Architecture
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```mermaid
 flowchart LR
@@ -235,7 +235,160 @@ flowchart LR
 
     Email --> SMTP
 ```
+## Booking Workflow
 
+```mermaid
+flowchart TD
+
+Start([Customer])
+
+Start --> Pickup["📍 Select Pickup"]
+
+Pickup --> Destination["📍 Select Destination"]
+
+Destination --> Date["📅 Choose Date & Time"]
+
+Date --> Vehicle["🚘 Select Vehicle"]
+
+Vehicle --> Pricing["💰 Dynamic Pricing Engine"]
+
+Pricing --> Review["📄 Review Booking"]
+
+Review --> Login{"Logged In?"}
+
+Login -- No --> Register["🔐 Login / Register"]
+
+Login -- Yes --> Payment["✅ Confirm Booking"]
+
+Register --> Payment
+
+Payment --> Database["🍃 Store Booking"]
+
+Database --> Email["📧 Confirmation Email"]
+
+Email --> Success([Booking Successful])
+
+```
+##  Dynamic Pricing Engine
+
+```mermaid
+flowchart TD
+
+Start([Ride Request])
+
+Start --> Vehicle["🚘 Vehicle Type"]
+
+Vehicle --> Ride["🚖 Ride Category"]
+
+Ride --> Distance["📍 Distance"]
+
+Distance --> Duration["⏱ Duration"]
+
+Duration --> PricingMap["📊 Price Map"]
+
+PricingMap --> Condition{"Special Conditions?"}
+
+Condition -- Airport --> AirportFee["Airport Pricing"]
+
+Condition -- Hourly --> Hourly["Hourly Rate"]
+
+Condition -- Standard --> Standard["Distance Rate"]
+
+AirportFee --> Total
+
+Hourly --> Total
+
+Standard --> Total
+
+Total["💰 Final Fare"]
+
+Total --> Booking["Booking Summary"]
+
+```
+## 🗄️ Database Design
+
+```mermaid
+erDiagram
+
+    USERS ||--o{ BOOKINGS : places
+    VEHICLES ||--o{ BOOKINGS : assigned
+    DRIVERS ||--o{ BOOKINGS : drives
+    PRICEMAPS ||--o{ BOOKINGS : calculates
+    THEMES ||--|| USERS : customizes
+
+    USERS {
+        string id
+        string name
+        string email
+        string password
+        string role
+    }
+
+    BOOKINGS {
+        string id
+        string vehicle
+        string pickup
+        string destination
+        date bookingDate
+        float fare
+        string status
+    }
+
+    VEHICLES {
+        string id
+        string name
+        string category
+        int seats
+        string image
+    }
+
+    DRIVERS {
+        string id
+        string name
+        string phone
+        string license
+    }
+
+    PRICEMAPS {
+        string id
+        float baseRate
+        float hourlyRate
+        float chauffeurRate
+    }
+
+    THEMES {
+        string id
+        string primaryColor
+        string logo
+    }
+
+```
+## 🔐 Authentication Flow
+
+```mermaid
+sequenceDiagram
+
+Customer->>Frontend: Login
+
+Frontend->>Backend: POST /login
+
+Backend->>MongoDB: Verify User
+
+MongoDB-->>Backend: User Found
+
+Backend->>Backend: Verify Password
+
+Backend-->>Frontend: JWT Token
+
+Frontend->>Frontend: Store Token
+
+Frontend->>Backend: Authenticated Request
+
+Backend->>Backend: Verify JWT
+
+Backend-->>Frontend: Protected Resource
+
+```
 
 # :) Project Structure
 
