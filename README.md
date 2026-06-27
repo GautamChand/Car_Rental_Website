@@ -235,9 +235,7 @@ flowchart LR
 
     Email --> SMTP
 ```
-```
 
----
 
 # :) Project Structure
 
