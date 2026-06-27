@@ -103,6 +103,40 @@ The system separates customer-facing functionality from administrative operation
 
 ---
 
+## Booking Workflow
+
+```mermaid
+flowchart TD
+
+Start([Customer])
+
+Start --> Pickup["📍 Select Pickup"]
+
+Pickup --> Destination["📍 Select Destination"]
+
+Destination --> Date["📅 Choose Date & Time"]
+
+Date --> Vehicle["🚘 Select Vehicle"]
+
+Vehicle --> Pricing["💰 Dynamic Pricing Engine"]
+
+Pricing --> Review["📄 Review Booking"]
+
+Review --> Login{"Logged In?"}
+
+Login -- No --> Register["🔐 Login / Register"]
+
+Login -- Yes --> Payment["✅ Confirm Booking"]
+
+Register --> Payment
+
+Payment --> Database["🍃 Store Booking"]
+
+Database --> Email["📧 Confirmation Email"]
+
+Email --> Success([Booking Successful])
+
+```
 ## Dynamic Pricing Engine
 
 The pricing engine calculates fares based on multiple business rules instead of fixed values.
@@ -120,7 +154,42 @@ Pricing considers:
 This architecture allows business administrators to update prices without modifying application code.
 
 ---
+##  Dynamic Pricing Engine
 
+```mermaid
+flowchart TD
+
+Start([Ride Request])
+
+Start --> Vehicle["🚘 Vehicle Type"]
+
+Vehicle --> Ride["🚖 Ride Category"]
+
+Ride --> Distance["📍 Distance"]
+
+Distance --> Duration["⏱ Duration"]
+
+Duration --> PricingMap["📊 Price Map"]
+
+PricingMap --> Condition{"Special Conditions?"}
+
+Condition -- Airport --> AirportFee["Airport Pricing"]
+
+Condition -- Hourly --> Hourly["Hourly Rate"]
+
+Condition -- Standard --> Standard["Distance Rate"]
+
+AirportFee --> Total
+
+Hourly --> Total
+
+Standard --> Total
+
+Total["💰 Final Fare"]
+
+Total --> Booking["Booking Summary"]
+
+```
 ## Authentication
 
 * JWT Authentication
@@ -131,7 +200,32 @@ This architecture allows business administrators to update prices without modify
 * Secure API access
 
 ---
+## Authentication Flow
 
+```mermaid
+sequenceDiagram
+
+Customer->>Frontend: Login
+
+Frontend->>Backend: POST /login
+
+Backend->>MongoDB: Verify User
+
+MongoDB-->>Backend: User Found
+
+Backend->>Backend: Verify Password
+
+Backend-->>Frontend: JWT Token
+
+Frontend->>Frontend: Store Token
+
+Frontend->>Backend: Authenticated Request
+
+Backend->>Backend: Verify JWT
+
+Backend-->>Frontend: Protected Resource
+
+```
 ## Email Services
 
 Integrated email functionality provides:
@@ -142,6 +236,24 @@ Integrated email functionality provides:
 * Administrative alerts
 
 ---
+## Email Notification Service
+
+```mermaid
+flowchart LR
+
+Booking["Booking Confirmed"]
+
+Booking --> API["Express API"]
+
+API --> Email["Email Service"]
+
+Email --> SMTP["SMTP"]
+
+SMTP --> Customer["Customer"]
+
+SMTP --> Admin["Administrator"]
+
+```
 
 # :) Technology Stack
 
@@ -185,8 +297,6 @@ Integrated email functionality provides:
 ---
 
 # :) Architecture
-
-## System Architecture
 
 ```mermaid
 flowchart LR
@@ -235,76 +345,7 @@ flowchart LR
 
     Email --> SMTP
 ```
-## Booking Workflow
 
-```mermaid
-flowchart TD
-
-Start([Customer])
-
-Start --> Pickup["📍 Select Pickup"]
-
-Pickup --> Destination["📍 Select Destination"]
-
-Destination --> Date["📅 Choose Date & Time"]
-
-Date --> Vehicle["🚘 Select Vehicle"]
-
-Vehicle --> Pricing["💰 Dynamic Pricing Engine"]
-
-Pricing --> Review["📄 Review Booking"]
-
-Review --> Login{"Logged In?"}
-
-Login -- No --> Register["🔐 Login / Register"]
-
-Login -- Yes --> Payment["✅ Confirm Booking"]
-
-Register --> Payment
-
-Payment --> Database["🍃 Store Booking"]
-
-Database --> Email["📧 Confirmation Email"]
-
-Email --> Success([Booking Successful])
-
-```
-##  Dynamic Pricing Engine
-
-```mermaid
-flowchart TD
-
-Start([Ride Request])
-
-Start --> Vehicle["🚘 Vehicle Type"]
-
-Vehicle --> Ride["🚖 Ride Category"]
-
-Ride --> Distance["📍 Distance"]
-
-Distance --> Duration["⏱ Duration"]
-
-Duration --> PricingMap["📊 Price Map"]
-
-PricingMap --> Condition{"Special Conditions?"}
-
-Condition -- Airport --> AirportFee["Airport Pricing"]
-
-Condition -- Hourly --> Hourly["Hourly Rate"]
-
-Condition -- Standard --> Standard["Distance Rate"]
-
-AirportFee --> Total
-
-Hourly --> Total
-
-Standard --> Total
-
-Total["💰 Final Fare"]
-
-Total --> Booking["Booking Summary"]
-
-```
 ## 🗄️ Database Design
 
 ```mermaid
@@ -363,32 +404,7 @@ erDiagram
     }
 
 ```
-## 🔐 Authentication Flow
 
-```mermaid
-sequenceDiagram
-
-Customer->>Frontend: Login
-
-Frontend->>Backend: POST /login
-
-Backend->>MongoDB: Verify User
-
-MongoDB-->>Backend: User Found
-
-Backend->>Backend: Verify Password
-
-Backend-->>Frontend: JWT Token
-
-Frontend->>Frontend: Store Token
-
-Frontend->>Backend: Authenticated Request
-
-Backend->>Backend: Verify JWT
-
-Backend-->>Frontend: Protected Resource
-
-```
 
 # :) Project Structure
 
