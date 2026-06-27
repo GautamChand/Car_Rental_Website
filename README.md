@@ -254,9 +254,9 @@ SMTP --> Admin["Administrator"]
 
 ```
 # Screenshot
-![Booking Page](bookingPAge.png)
-![Car List](carlists.png)
-![Confirmation Page](confirmationPage.png)
+![Booking Page](images/bookingPAge.png)
+![Car List](images/carlists.png)
+![Confirmation Page](images/confirmationPage.png)
 # :) Technology Stack
 
 ## Frontend
