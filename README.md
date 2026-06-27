@@ -256,7 +256,7 @@ SMTP --> Admin["Administrator"]
 # Screenshots
 
 # Home Page
-![Home Page](carRentalhome.png)
+![Home Page](images/carRentalhome.png)
 
 ---
 # Booking Page
