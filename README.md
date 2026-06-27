@@ -253,10 +253,20 @@ SMTP --> Customer["Customer"]
 SMTP --> Admin["Administrator"]
 
 ```
-# Screenshot
+# Screenshots
+
+# Booking Page
 ![Booking Page](images/bookingPAge.png)
+
+---
+# Car Lists
 ![Car List](images/carlists.png)
+
+--
+# Confirmation Page
 ![Confirmation Page](images/confirmationPage.png)
+
+--
 # :) Technology Stack
 
 ## Frontend
